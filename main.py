@@ -12,6 +12,8 @@ for i in range(316):
             preview_src = urllib2.urlopen(preview_url).read()
             preview_soup = BeautifulSoup(preview_src)
             name = str(preview_soup.find("h1"))[4:-5]
+            if "/" in name:
+                name = name.replace("/", "-")
             for preview_div in preview_soup.findAll("div", attrs = {"class": "size13"}):
                 if "Download Wallpaper" in str(preview_div):
                     image_url = preview_div.find("a")["href"]
